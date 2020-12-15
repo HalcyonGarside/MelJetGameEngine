@@ -2,18 +2,20 @@
 
 Shader::Shader(const char* vsPath, const char* fsPath)
 {
-	std::ifstream vsFile = std::ifstream(vsPath);
-	std::ifstream fsFile = std::ifstream(fsPath);
+	std::ifstream vsFile;
+	std::ifstream fsFile;
+
+	vsFile.open(vsPath);
+	fsFile.open(fsPath);
 
 	std::string vsSource, fsSource;
-	std::stringstream shaderStream;
+	std::stringstream vsStream, fsStream;
 
-	shaderStream << vsFile.rdbuf();
-	vsSource = shaderStream.str();
-	shaderStream.clear();
+	vsStream << vsFile.rdbuf();
+	vsSource = vsStream.str();
 
-	shaderStream << fsFile.rdbuf();
-	fsSource = shaderStream.str();
+	fsStream << fsFile.rdbuf();
+	fsSource = fsStream.str();
 
 	const char* vsCode = vsSource.c_str();
 	const char* fsCode = fsSource.c_str();
@@ -26,15 +28,27 @@ Shader::Shader(const char* vsPath, const char* fsPath)
 	glShaderSource(fs, 1, &fsCode, NULL);
 	glCompileShader(fs);
 
-	program = glCreateProgram();
+	_program = glCreateProgram();
 
-	glAttachShader(program, vs);
-	glAttachShader(program, fs);
+	glAttachShader(_program, vs);
+	glAttachShader(_program, fs);
 
-	glLinkProgram(program);
+	glLinkProgram(_program);
 }
 
 void Shader::useShader()
 {
-	glUseProgram(program);
+	glUseProgram(_program);
+}
+
+void Shader::setFloat3f(const char* name, float xVal, float yVal, float zVal)
+{
+	GLuint uLocation = glGetUniformLocation(_program, name);
+	glUniform3f(uLocation, xVal, yVal, zVal);
+}
+
+void Shader::setInt(const char* name, int value)
+{
+	GLuint uLocation = glGetUniformLocation(_program, name);
+	glUniform1i(uLocation, value);
 }

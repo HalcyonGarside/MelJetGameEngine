@@ -1,29 +1,7 @@
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
+#include "Shader.h"
 #include <iostream>
-
-const char* vs =
-	"#version 410 core													\n"
-	"                                                                   \n"
-	"layout (location = 0) in vec3 aPos;								\n"
-	"uniform vec3 i_col;												\n"		
-	"																	\n"
-	"out vec3 o_col;													\n"
-	"void main()														\n"
-	"{																	\n"
-	"    gl_Position = vec4(aPos, 1.0);									\n"
-	"	 o_col = i_col;													\n"
-	"}																	\0";
-
-const char* fs = 
-	"#version 410 core													\n"
-	"																	\n"
-	"out vec4 color;                                                    \n"
-	"in vec3 o_col;														\n"
-	"void main()														\n"
-	"{																	\n"
-	"    color = vec4(o_col, 1.0f);										\n"
-	"}																	\0";
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -79,69 +57,20 @@ void main(int argc, char* argv)
 		3, 0, 2
 	};
 
-	GLuint vShader, fShader;
-	int success;
-	char infoLog[512];
-
-	vShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vShader, 1, &vs, NULL);
-	glCompileShader(vShader);
-
-	glGetShaderiv(vShader, GL_COMPILE_STATUS, &success);
-	if (!success)
-	{
-		glGetShaderInfoLog(vShader, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
-	}
-
-	fShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fShader, 1, &fs, NULL);
-	glCompileShader(fShader);
-
-
-	glGetShaderiv(fShader, GL_COMPILE_STATUS, &success);
-	if (!success)
-	{
-		glGetShaderInfoLog(fShader, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
-	}
-
-	GLint program;
-	program = glCreateProgram();
-	glAttachShader(program, vShader);
-	glAttachShader(program, fShader);
-
-	glLinkProgram(program);
-
-	GLchar colPos;
-	glGetUniformLocation(program, &colPos);
-
-
-
-	glGetProgramiv(program, GL_LINK_STATUS, &success);
-	if (!success) {
-		glGetProgramInfoLog(program, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-	}
-
-	glDeleteShader(vShader);
-	glDeleteShader(fShader);
+	Shader prog = Shader("examples/test_shaders/test_shader.vs", "examples/test_shaders/test_shader.fs");
 
 	GLuint VAO, VBO, EBO;
 	glGenBuffers(1, &VBO);
-	//glGenBuffers(1, &EBO);
+	glGenBuffers(1, &EBO);
 	glGenVertexArrays(1, &VAO);
 
 	glBindVertexArray(VAO);
 
-	float redCol = 0.5f;
-	glUniform3f(colPos, redCol, 0.5, 0.0);
-
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
@@ -150,19 +79,19 @@ void main(int argc, char* argv)
 
 	glBindVertexArray(0);
 
-
+	float redCol = 0.5f;
 	float delta = 0.025f;
 	while (!glfwWindowShouldClose(window))
 	{
 		glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glUseProgram(program);
+		prog.useShader();
 		glBindVertexArray(VAO);
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
 		redCol += delta;
-		glUniform3f(colPos, redCol, 0.5, 0.0);
+		prog.setFloat3f("i_col", redCol, 1.0f, 0.0f);
 
 		if (redCol >= 1.0)
 		{
@@ -172,8 +101,8 @@ void main(int argc, char* argv)
 		{
 			delta = 0.025f;
 		}
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
+		//glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

@@ -10,7 +10,7 @@
 class Shader
 {
 private:
-	GLuint program;
+	GLuint _program;
 
 public:
 
@@ -19,6 +19,5 @@ public:
 	void useShader();
 
 	void setFloat3f(const char* name, float xVal, float yVal, float zVal);
-	void setBool(const char* name, bool value);
 	void setInt(const char* name, int value);
 };
