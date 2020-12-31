@@ -46,3 +46,16 @@ Create or find an acceptable UI library [ ]
 
 Mash the renderer and the UI together in a way that allows a user to develop
 a game [ ]
+
+Practice Labs:
+In addition to the development of this engine, I am on the hunt for practice 
+exercises.  For these, I will post the sources from which I found them.  Each
+source link is labelled with the name of the folder it corresponds to, and is
+accompanied with a short description as needed.
+
+- david_eck: http://math.hws.edu/eck/cs424/index_f17.html
+This website is from a professor named David Eck from the Hobart and William
+Smith Colleges.  He occasionally teaches a graphics course there and posts
+the resources on this website, everything between the textbook he uses (and 
+has written) to the hands-on material he assigns to his students.  This folder 
+contains all of the labs that I have used as practice from the link above.

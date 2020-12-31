@@ -63,26 +63,26 @@ void main(int argc, char* argv)
 	VertexBuffer buf = VertexBuffer();
 	buf.createVertexBuffer(vertices, 4, indices, 2);
 
-	float redCol = 0.5f;
-	float delta = 0.025f;
+	float purpCol = 0.5f;
+	float delta = 0.0005f;
 	while (!glfwWindowShouldClose(window))
 	{
-		glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		prog.useShader();
 		buf.enableBuffer();
 
-		redCol += delta;
-		prog.setFloat3f("i_col", redCol, 1.0f, 0.0f);
+		purpCol += delta;
+		prog.setFloat3f("i_col", purpCol, 0.0f, purpCol);
 
-		if (redCol >= 1.0)
+		if (purpCol >= 1.0)
 		{
-			delta = -0.025f;
+			delta = -delta;
 		}
-		if (redCol <= 0.0)
+		if (purpCol <= 0.0)
 		{
-			delta = 0.025f;
+			delta = -delta;
 		}
 
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
