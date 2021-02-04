@@ -15,6 +15,7 @@ private:
 public:
 
 	Shader(const char* vsPath, const char* fsPath);
+	Shader();
 
 	void useShader();
 

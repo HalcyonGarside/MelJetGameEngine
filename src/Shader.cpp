@@ -1,5 +1,10 @@
 #include "Shader.h"
 
+Shader::Shader()
+{
+	_program = -1;
+}
+
 Shader::Shader(const char* vsPath, const char* fsPath)
 {
 	std::ifstream vsFile;
