@@ -21,4 +21,6 @@ public:
 
 	void setFloat3f(const char* name, float xVal, float yVal, float zVal);
 	void setInt(const char* name, int value);
+
+	GLuint getProgram();
 };

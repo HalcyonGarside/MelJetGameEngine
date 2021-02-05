@@ -17,7 +17,7 @@ public:
 	VertexBuffer();
 	~VertexBuffer();
 
-	void createVertexBuffer(float* vertices, int V, int* indices, int I);
+	void createVertexBuffer(float* vertices, int V, int num_elements, int* indices, int I);
 
 	void enableBuffer();
 

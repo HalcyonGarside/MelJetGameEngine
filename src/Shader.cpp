@@ -57,3 +57,8 @@ void Shader::setInt(const char* name, int value)
 	GLuint uLocation = glGetUniformLocation(_program, name);
 	glUniform1i(uLocation, value);
 }
+
+GLuint Shader::getProgram()
+{
+	return _program;
+}

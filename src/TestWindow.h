@@ -18,4 +18,7 @@ private:
 	GLFWwindow* window;
 	Shader prog;
 	VertexBuffer buf;
+	unsigned int texture;
+	float z;
+	unsigned char* noise;
 };

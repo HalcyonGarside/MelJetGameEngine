@@ -15,7 +15,7 @@ VertexBuffer::~VertexBuffer()
 }
 
 
-void VertexBuffer::createVertexBuffer(float* vertices, int V, int* indices, int I)
+void VertexBuffer::createVertexBuffer(float* vertices, int V, int num_elements, int* indices, int I)
 {
 	if (VBO == -1 || VAO == -1 || EBO == -1)
 	{
@@ -30,7 +30,7 @@ void VertexBuffer::createVertexBuffer(float* vertices, int V, int* indices, int 
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, V * 3 * sizeof(float), _vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, V * num_elements * sizeof(float), _vertices, GL_STATIC_DRAW);
 	GLenum error;
 	while ((error = glGetError()) != GL_NO_ERROR)
 	{
@@ -44,13 +44,23 @@ void VertexBuffer::createVertexBuffer(float* vertices, int V, int* indices, int 
 		std::cout << error << std::endl;
 	}
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, num_elements * sizeof(float), (void*)0);
 	while ((error = glGetError()) != GL_NO_ERROR)
 	{
 		std::cout << error << std::endl;
 	}
 
+	if (num_elements == 5)
+	{
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, num_elements * sizeof(float), (void*)(3 * sizeof(float)));
+		while ((error = glGetError()) != GL_NO_ERROR)
+		{
+			std::cout << error << std::endl;
+		}
+	}
+
 	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
