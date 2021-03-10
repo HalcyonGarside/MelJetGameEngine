@@ -7,7 +7,7 @@ class MatUtils
 
 William Blanchard
 Feb 2021
-wsb@iastate.edu
+wil.s.blanchard@gmail.com
 MIT License
 ---------------------------------------------------------------
 Last edited:
@@ -15,11 +15,25 @@ March 9, 2021
 - Initial commit
 */
 
-#include <glm.hpp>
+//ext
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+//std
+#include <iostream>
 
 class MatUtils
 {
 public:
+
+	/*
+		Print the glm pose matrix
+
+		@param pose - the pose matrix
+		@param rows - the number of rows in the matrix
+		@param cols - the number of columns in the matrix
+	*/
+	static void printGlmMat(float* pose, int rows, int cols);
 
 	/*
 		Get the translation vector from the given pose matrix

@@ -17,7 +17,7 @@ void TestWindow::init()
 {
 	if (!glfwInit())
 	{
-		std::cout << "glfw not initialized" << std::endl;
+		std::cout << "[ERROR] - glfw could not be initialized" << std::endl;
 		return;
 	}
 
@@ -29,7 +29,7 @@ void TestWindow::init()
 
 	if (!window)
 	{
-		std::cout << "The window didn't fucking open";
+		std::cout << "[ERROR] - glfw window didn't initialize properly";
 		return;
 	}
 
@@ -39,7 +39,7 @@ void TestWindow::init()
 
 	if (glewInit() != GLEW_OK)
 	{
-		std::cout << "SHit not initialized" << std::endl;
+		std::cout << "[ERROR] - glew could not be initialized" << std::endl;
 		return;
 	}
 
