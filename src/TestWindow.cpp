@@ -151,7 +151,7 @@ void TestWindow::run()
 			noise[(i * 3) + 1] = (uint8_t)temp;
 			noise[(i * 3) + 2] = (uint8_t)temp;
 		}
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1000, 1000, 0, GL_RGB, GL_UNSIGNED_BYTE, noise);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 1000, 1000, GL_RGB, GL_UNSIGNED_BYTE, noise);
 
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
 
