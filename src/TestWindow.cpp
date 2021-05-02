@@ -71,6 +71,8 @@ void TestWindow::init()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+
+
 	//Everything below this point is a use of the stb_perlin header file for outputting a temporary noise picture.
 	//Right now, the .png is saved to a trash folder.  However, there will be a temp/data folder created for this purpose later on.
 
@@ -105,7 +107,7 @@ void TestWindow::init()
 void TestWindow::run()
 {
 	float purpCol = 0.5f;
-	float delta = 0.0005f;
+	float delta = 0.001f;
 	while (!glfwWindowShouldClose(window))
 	{
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -116,17 +118,17 @@ void TestWindow::run()
 		glBindTexture(GL_TEXTURE_2D, texture);
 		buf.enableBuffer();
 
-		//purpCol += delta;
-		//prog.setFloat3f("i_col", purpCol, 0.0f, purpCol);
+		purpCol += delta;
+		prog.setFloat3f("i_col", purpCol, 0.0f, purpCol);
 
-		//if (purpCol >= 1.0)
-		//{
-		//	delta = -delta;
-		//}
-		//if (purpCol <= 0.0)
-		//{
-		//	delta = -delta;
-		//}
+		if (purpCol >= 1.0)
+		{
+			delta = -delta;
+		}
+		if (purpCol <= 0.0)
+		{
+			delta = -delta;
+		}
 
 		z += 0.01f;
 

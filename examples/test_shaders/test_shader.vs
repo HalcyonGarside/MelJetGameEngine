@@ -2,7 +2,9 @@
 
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec2 tPos;
+
 uniform vec3 i_col;
+
 
 out vec3 o_col;
 out vec2 t_coord;

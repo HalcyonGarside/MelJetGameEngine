@@ -49,6 +49,16 @@ public:
 	void raycast(unsigned char* image, int resx, int resy, glm::mat4& camera_mat);
 
 	/*
+		Get the current image from the scene
+
+		@param image - the image buffer in which to place the image from the camera
+		@param resx - the width of the image in pixels
+		@param resy - the height of the image in pixels
+		@param cam_ray - the position and direction vectors of the camera
+	*/
+	void raycast(unsigned char* image, int resx, int resy, mj::Ray& cam_ray);
+
+	/*
 		Resets the scene for this raycaster
 
 		@param scene - The scene to set this raycaster to
