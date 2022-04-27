@@ -1,3 +1,4 @@
+#Visual Studio Files
 .vs/
 .vscode/
 *.sln
@@ -6,7 +7,11 @@
 *.vcxproj.user
 x64/
 
-
+#JetBrains IDE
 .idea
 practice_labs/**/out
 *.iml
+
+#Output files
+MelJet
+*.o
