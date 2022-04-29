@@ -15,6 +15,24 @@ until we crack the surface into a world of possibility.
 //OpenGL
 #include "GLFW/glfw3.h"
 
+GLFWwindow* mainWindow;
+
+void keypress_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if(action == GLFW_PRESS)
+    {
+        if(key == GLFW_KEY_W)
+        {
+            
+        }
+        if(key == GLFW_KEY_ESCAPE)
+        {
+            glfwSetWindowShouldClose(mainWindow, GLFW_TRUE);
+        }
+        printf("%s", glfwGetKeyName(key, scancode));
+    }
+}
+
 int main()
 {
     printf("Hello, Kay\n");
@@ -22,7 +40,6 @@ int main()
     //Writing this is practically a copy-paste
     //Writing the makefile without prior knowledge...
     //That's a bit harder.
-    GLFWwindow* mainWindow;
 
     if(!glfwInit())
         return -1;
@@ -36,6 +53,7 @@ int main()
     }
 
     glfwMakeContextCurrent(mainWindow);
+    glfwSetKeyCallback(mainWindow, keypress_callback);
 
     while(!glfwWindowShouldClose(mainWindow))
     {
