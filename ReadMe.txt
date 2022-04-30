@@ -29,3 +29,9 @@ In another shocking detail, I will not be working on a rendering engine right ou
 That's about all I have for my ReadMe pseudo-rant.  I'll update this when I actually have something going on in this repository that is compilable and observable by an outside party.  I'm hoping to apply the knowledge I've gained from being at university and from my career to churn out a good product.  I'm still planning on making some archive of my progress here for future consumption, but I'm not sure if it'll be in blog form or in video form.  In the meantime, keep your eyes peeled for future updoots.  Let's hope this works this time around.
 
 Thanks for your faith, y'all, and enjoy watching me flounder.
+
+------------------------------------------------------------------------------
+
+Update: April 29, 2022
+
+I have a blog.  It is completely illegible, but it's a blog.  You may find it right about [here](https://blog.spacehey.com/apollyawn).  Enjoy!
