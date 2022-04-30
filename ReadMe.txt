@@ -34,4 +34,4 @@ Thanks for your faith, y'all, and enjoy watching me flounder.
 
 Update: April 29, 2022
 
-I have a blog.  It is completely illegible, but it's a blog.  You may find it right about [here](https://blog.spacehey.com/apollyawn).  Enjoy!
+I have a blog.  It is completely illegible, but it's a blog.  You may find it right about here: https://blog.spacehey.com/apollyawn.  Enjoy!
